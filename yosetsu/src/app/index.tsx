@@ -1,21 +1,25 @@
 import * as Device from "expo-device";
 import { Platform, StyleSheet } from "react-native";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
+import { PjText } from "@/components/pj-text";
+import { PjView } from "@/components/pj-view";
+import { router, useRouter } from "expo-router";
+import { use } from "react";
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText>yosetsu</ThemedText>
-    </ThemedView>
+    <PjView>
+      <PjText type="title">yosetsu</PjText>
+      <PjView style={{ height: "60%" }}>
+        <PjText
+          onPress={() => {
+            router.push("/quiz/1");
+          }}
+        >
+          go to quiz
+        </PjText>
+      </PjView>
+    </PjView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
