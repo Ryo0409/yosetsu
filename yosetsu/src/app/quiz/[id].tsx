@@ -1,11 +1,9 @@
-import { PjText } from "@/components/pj-text";
-import { PjView } from "@/components/pj-view";
-import { router, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { PjQuizView } from "@/components/pj-quiz-view";
 
 export default function HomeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-
   const currentId = parseInt(id);
 
   const handleNext = () => {
@@ -15,14 +13,8 @@ export default function HomeScreen() {
     } else {
       console.log(currentId);
       router.push(`/quiz/${currentId + 1}`);
-      // Navigate to the next quiz question
     }
   };
 
-  return (
-    <PjView>
-      <PjText>quiz</PjText>
-      <PjText onPress={handleNext}>Next</PjText>
-    </PjView>
-  );
+  return <PjQuizView quizId={currentId} onNext={handleNext} />;
 }
